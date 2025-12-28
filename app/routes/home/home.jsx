@@ -1,17 +1,18 @@
-import gamestackTexture2Large from '~/assets/gamestack-list-large.jpg';
-import gamestackTexture2Placeholder from '~/assets/gamestack-list-placeholder.jpg';
-import gamestackTexture2 from '~/assets/gamestack-list.jpg';
-import gamestackTextureLarge from '~/assets/gamestack-login-large.jpg';
-import gamestackTexturePlaceholder from '~/assets/gamestack-login-placeholder.jpg';
-import gamestackTexture from '~/assets/gamestack-login.jpg';
-import sliceTextureLarge from '~/assets/slice-app-large.jpg';
-import sliceTexturePlaceholder from '~/assets/slice-app-placeholder.jpg';
-import sliceTexture from '~/assets/slice-app.jpg';
-import sprTextureLarge from '~/assets/spr-lesson-builder-dark-large.jpg';
-import sprTexturePlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.jpg';
-import sprTexture from '~/assets/spr-lesson-builder-dark.jpg';
+import callAnalysisTextureLarge from '~/assets/call-analysis-large.jpg';
+import callAnalysisTexturePlaceholder from '~/assets/call-analysis-placeholder.jpg';
+import callAnalysisTexture from '~/assets/call-analysis.jpg';
+import heyBuddyTextureLarge from '~/assets/hey-buddy-large.jpg';
+import heyBuddyTexturePlaceholder from '~/assets/hey-buddy-placeholder.jpg';
+import heyBuddyTexture from '~/assets/hey-buddy.jpg';
+import internalCrmTexture2Large from '~/assets/internal-crm-2-large.png';
+import internalCrmTexture2Placeholder from '~/assets/internal-crm-2-placeholder.jpg';
+import internalCrmTexture2 from '~/assets/internal-crm-2.png';
+import internalCrmTextureLarge from '~/assets/internal-crm-large.png';
+import internalCrmTexturePlaceholder from '~/assets/internal-crm-placeholder.jpg';
+import internalCrmTexture from '~/assets/internal-crm.jpg';
 import { Footer } from '~/components/footer';
 import { baseMeta } from '~/utils/meta';
+import { Experience } from './experience';
 import { Intro } from './intro';
 import { Profile } from './profile';
 import { ProjectSummary } from './project-summary';
@@ -41,8 +42,8 @@ export const links = () => {
 
 export const meta = () => {
   return baseMeta({
-    title: 'Designer + Developer',
-    description: `Design portfolio of ${config.name} — a product designer working on web & mobile apps with a focus on motion, experience design, and accessibility.`,
+    title: 'AI Automation Engineer',
+    description: `Portfolio of ${config.name} — an AI Automation Engineer building production-grade systems with LLMs, Voice AI, and workflow automation.`,
   });
 };
 
@@ -53,10 +54,11 @@ export const Home = () => {
   const projectOne = useRef();
   const projectTwo = useRef();
   const projectThree = useRef();
+  const experience = useRef();
   const details = useRef();
 
   useEffect(() => {
-    const sections = [intro, projectOne, projectTwo, projectThree, details];
+    const sections = [intro, projectOne, projectTwo, projectThree, experience, details];
 
     const sectionObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -99,21 +101,21 @@ export const Home = () => {
         scrollIndicatorHidden={scrollIndicatorHidden}
       />
       <ProjectSummary
-        id="project-1"
+        id="projects"
         sectionRef={projectOne}
         visible={visibleSections.includes(projectOne.current)}
         index={1}
-        title="Designing the future of education"
-        description="Designing a platform to help educators build better online courseware"
+        title="AI Call Analysis System"
+        description="A production-ready system that analyzes sales and support calls using AI, extracting KPIs like sentiment, engagement, and outcomes"
         buttonText="View project"
-        buttonLink="/projects/smart-sparrow"
+        buttonLink="/projects/call-analysis"
         model={{
           type: 'laptop',
-          alt: 'Smart Sparrow lesson builder',
+          alt: 'AI Call Analysis Dashboard',
           textures: [
             {
-              srcSet: `${sprTexture} 1280w, ${sprTextureLarge} 2560w`,
-              placeholder: sprTexturePlaceholder,
+              srcSet: `${callAnalysisTexture} 1280w, ${callAnalysisTextureLarge} 2560w`,
+              placeholder: callAnalysisTexturePlaceholder,
             },
           ],
         }}
@@ -124,21 +126,21 @@ export const Home = () => {
         sectionRef={projectTwo}
         visible={visibleSections.includes(projectTwo.current)}
         index={2}
-        title="Video game progress tracking"
-        description="Design and development for a video game tracking app built in React Native"
-        buttonText="View website"
-        buttonLink="https://gamestack.hamishw.com"
+        title="Internal Team CRM"
+        description="A comprehensive CRM with 3-level access control, task & leave management, reports, dashboards, project & document management, and Discord/Slack integration"
+        buttonText="View project"
+        buttonLink="/projects/internal-crm"
         model={{
           type: 'phone',
-          alt: 'App login screen',
+          alt: 'Internal Team CRM Mobile Interface',
           textures: [
             {
-              srcSet: `${gamestackTexture} 375w, ${gamestackTextureLarge} 750w`,
-              placeholder: gamestackTexturePlaceholder,
+              srcSet: `${internalCrmTexture} 375w, ${internalCrmTextureLarge} 750w`,
+              placeholder: internalCrmTexturePlaceholder,
             },
             {
-              srcSet: `${gamestackTexture2} 375w, ${gamestackTexture2Large} 750w`,
-              placeholder: gamestackTexture2Placeholder,
+              srcSet: `${internalCrmTexture2} 375w, ${internalCrmTexture2Large} 750w`,
+              placeholder: internalCrmTexture2Placeholder,
             },
           ],
         }}
@@ -148,20 +150,25 @@ export const Home = () => {
         sectionRef={projectThree}
         visible={visibleSections.includes(projectThree.current)}
         index={3}
-        title="Biomedical image collaboration"
-        description="Increasing the amount of collaboration in Slice, an app for biomedical imaging"
+        title="Hey Buddy - Virtual Assistant"
+        description="An intelligent assistant with face auth, speech recognition, browser & system automation, Google & Spotify APIs, LLM chat, image generation, and gesture-based virtual mouse/keyboard using OpenCV"
         buttonText="View project"
-        buttonLink="/projects/slice"
+        buttonLink="/projects/hey-buddy"
         model={{
           type: 'laptop',
-          alt: 'Annotating a biomedical image in the Slice app',
+          alt: 'Hey Buddy Virtual Assistant Dashboard',
           textures: [
             {
-              srcSet: `${sliceTexture} 800w, ${sliceTextureLarge} 1920w`,
-              placeholder: sliceTexturePlaceholder,
+              srcSet: `${heyBuddyTexture} 1280w, ${heyBuddyTextureLarge} 2560w`,
+              placeholder: heyBuddyTexturePlaceholder,
             },
           ],
         }}
+      />
+      <Experience
+        sectionRef={experience}
+        visible={visibleSections.includes(experience.current)}
+        id="experience"
       />
       <Profile
         sectionRef={details}

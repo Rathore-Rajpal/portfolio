@@ -6,36 +6,29 @@ uniform float direction;
 uniform bool reduceMotion;
 
 void main() {
-  if (reduceMotion) {
-    // Simple crossfade
-    vec4 _currentImage = texture2D(currentImage, vUv);
-    vec4 _nextImage = texture2D(nextImage, vUv);
-    vec4 finalTexture = mix(_currentImage, _nextImage, dispFactor);
-    gl_FragColor = finalTexture;
-  } else {
-    // Liquid distortion effect
-    vec2 uv = vUv;
-    vec4 _currentImage;
-    vec4 _nextImage;
-    float intensity = 0.6;
-
-    vec4 orig1 = texture2D(currentImage, uv);
-    vec4 orig2 = texture2D(nextImage, uv);
-
-    vec2 distortedPosition = vec2(
-      uv.x + direction * (dispFactor * (orig2.r * intensity)),
-      uv.y + direction * (dispFactor * (orig2 * intensity))
-    );
-
-    vec2 distortedPosition2 = vec2(
-      uv.x - direction * ((1.0 - dispFactor) * (orig1.r * intensity)),
-      uv.y - direction * ((1.0 - dispFactor) * (orig1 * intensity))
-    );
-
-    _currentImage = texture2D(currentImage, distortedPosition);
-    _nextImage = texture2D(nextImage, distortedPosition2);
-
-    vec4 finalTexture = mix(_currentImage, _nextImage, dispFactor);
-    gl_FragColor = finalTexture;
-  }
+  vec2 uv = vUv;
+  
+  // Smooth slide and fade transition
+  float slideAmount = 0.15;
+  
+  // Current image slides out
+  vec2 currentUv = vec2(
+    uv.x + direction * dispFactor * slideAmount,
+    uv.y
+  );
+  
+  // Next image slides in
+  vec2 nextUv = vec2(
+    uv.x - direction * (1.0 - dispFactor) * slideAmount,
+    uv.y
+  );
+  
+  vec4 _currentImage = texture2D(currentImage, currentUv);
+  vec4 _nextImage = texture2D(nextImage, nextUv);
+  
+  // Smooth eased crossfade
+  float easedFactor = dispFactor * dispFactor * (3.0 - 2.0 * dispFactor);
+  vec4 finalTexture = mix(_currentImage, _nextImage, easedFactor);
+  
+  gl_FragColor = finalTexture;
 }

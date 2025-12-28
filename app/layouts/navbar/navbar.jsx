@@ -155,20 +155,24 @@ export const Navbar = () => {
       <NavToggle onClick={() => setMenuOpen(!menuOpen)} menuOpen={menuOpen} />
       <nav className={styles.nav}>
         <div className={styles.navList}>
-          {navLinks.map(({ label, pathname }) => (
-            <RouterLink
-              unstable_viewTransition
-              prefetch="intent"
-              to={pathname}
-              key={label}
-              data-navbar-item
-              className={styles.navLink}
-              aria-current={getCurrent(pathname)}
-              onClick={handleNavItemClick}
-            >
-              {label}
-            </RouterLink>
-          ))}
+          {navLinks.map(({ label, pathname, isSection }) =>
+            isSection ? (
+              <div key={label} className={styles.navSectionLabel}>{label}</div>
+            ) : (
+              <RouterLink
+                unstable_viewTransition
+                prefetch="intent"
+                to={pathname}
+                key={label}
+                data-navbar-item
+                className={styles.navLink}
+                aria-current={getCurrent(pathname)}
+                onClick={handleNavItemClick}
+              >
+                {label}
+              </RouterLink>
+            )
+          )}
         </div>
         <NavbarIcons desktop />
       </nav>

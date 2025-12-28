@@ -1,0 +1,296 @@
+@layer components {
+  .experience {
+    height: 100vh;
+    width: 100%;
+    max-height: 1080px;
+    padding-bottom: var(--spaceL);
+    margin: 120px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+
+    @media (--mediaDesktop) {
+      margin: var(--space2XL) 0;
+    }
+
+    @media (--mediaTablet) {
+      height: auto;
+      margin: var(--space3XL) 0;
+    }
+
+    @media (--mediaMobile) {
+      padding-bottom: var(--space4XL);
+      margin-bottom: 0;
+    }
+  }
+
+  .content {
+    --textColumnWidth: 36%;
+
+    width: 100%;
+    max-width: var(--maxWidthL);
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: var(--textColumnWidth) 1fr;
+    grid-column-gap: var(--space2XL);
+
+    @media (--mediaLaptop) {
+      --textColumnWidth: 40%;
+    }
+
+    @media (--mediaTablet) {
+      grid-template-columns: 100%;
+      flex-direction: column-reverse;
+      height: auto;
+    }
+  }
+
+  .details {
+    z-index: var(--zIndex1);
+    position: relative;
+
+    @media (--mediaTablet) {
+      flex: 0 0 auto;
+      max-width: 410px;
+      grid-row: 2;
+      grid-column: 1;
+      justify-self: center;
+    }
+  }
+
+  .preview {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .model {
+    --width: 180%;
+    --aspectRatio: 12 / 10;
+
+    min-width: var(--width);
+    aspect-ratio: var(--aspectRatio);
+    display: grid;
+    position: relative;
+    top: 6%;
+    left: 14%;
+
+    @media (--mediaDesktop) {
+      --width: 180%;
+    }
+
+    @media (--mediaTablet) {
+      --width: 140%;
+      top: 10%;
+      left: 0;
+    }
+  }
+
+  .loader {
+    opacity: 0;
+    transition: opacity 400ms ease 1000ms;
+
+    &[data-visible='true'] {
+      opacity: 1;
+    }
+  }
+
+  .svg {
+    opacity: 0;
+    transition: opacity 1200ms ease 1400ms;
+    fill: var(--textTitle);
+    position: absolute;
+    width: 100%;
+    right: -36%;
+    bottom: 24%;
+    transform: translateY(50%);
+
+    &[data-visible='true'] {
+      opacity: var(--opacity);
+    }
+
+    @media (--mediaTablet) {
+      width: 80%;
+      right: -10%;
+      bottom: 18%;
+    }
+
+    @media (--mediaMobile) {
+      right: 0;
+    }
+  }
+
+  .index {
+    position: relative;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: var(--spaceM);
+    align-items: center;
+    margin-bottom: var(--spaceXL);
+  }
+
+  .indexNumber {
+    font-size: var(--fontSizeBodyS);
+    font-weight: var(--fontWeightMedium);
+    color: var(--primary);
+    opacity: 0;
+    transition-property: opacity;
+    transition-timing-function: var(--bezierFastoutSlowin);
+    transition-duration: var(--durationM);
+    transition-delay: 1.3s;
+
+    @media (--mediaUseMotion) {
+      transition-property: transform, opacity;
+      transform: translateX(calc(var(--spaceM) * -1));
+    }
+
+    &[data-visible='true'] {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .experienceCard {
+    background: rgb(var(--rgbBackground) / 0.6);
+    border: 1px solid rgb(var(--rgbText) / 0.1);
+    border-radius: var(--borderRadiusLarge);
+    padding: var(--spaceXL);
+    width: 100%;
+    opacity: 0;
+    transform: translate3d(0, var(--spaceL), 0);
+    transition: opacity var(--durationXL) ease var(--durationM),
+      transform var(--durationXL) var(--bezierFastoutSlowin) var(--durationM);
+
+    &[data-visible='true'] {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    @media (--mediaMobile) {
+      padding: var(--spaceL);
+    }
+  }
+
+  .cardHeader {
+    display: flex;
+    align-items: center;
+    gap: var(--spaceL);
+    margin-bottom: var(--spaceL);
+
+    @media (--mediaMobile) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spaceM);
+    }
+  }
+
+  .logoWrapper {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 140px;
+    height: auto;
+    border-radius: var(--borderRadiusSmall);
+    overflow: visible;
+  }
+
+  .companyLogo {
+    width: 140px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .headerInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spaceXS);
+  }
+
+  .role {
+    font-size: var(--fontSizeH4);
+    color: var(--textTitle);
+    margin: 0;
+  }
+
+  .company {
+    color: var(--primary);
+    font-weight: var(--fontWeightMedium);
+  }
+
+  .cardMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spaceL);
+    margin-bottom: var(--spaceL);
+  }
+
+  .metaItem {
+    display: flex;
+    align-items: center;
+    gap: var(--spaceXS);
+    color: var(--textLight);
+  }
+
+  .metaIcon {
+    font-size: var(--fontSizeBodyS);
+  }
+
+  .divider {
+    margin-bottom: var(--spaceL);
+  }
+
+  .description {
+    color: var(--textBody);
+    margin-bottom: var(--spaceM);
+    line-height: 1.6;
+    transition-property: opacity;
+    transition-timing-function: var(--bezierFastoutSlowin);
+    transition-duration: var(--durationXL);
+    transition-delay: var(--durationL);
+
+    &:last-of-type {
+      margin-bottom: var(--spaceL);
+    }
+  }
+
+  .companyInfo {
+    background: rgb(var(--rgbPrimary) / 0.08);
+    border-radius: var(--borderRadiusSmall);
+    padding: var(--spaceM);
+    margin-top: var(--spaceM);
+  }
+
+  .companyDescription {
+    color: var(--textLight);
+    margin: 0;
+    font-style: italic;
+  }
+
+  .sectionLoader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    width: 100%;
+    animation: fadeIn 0.8s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .experienceLoaded {
+    opacity: 1 !important;
+    transition: opacity 0.8s ease;
+  }
+}

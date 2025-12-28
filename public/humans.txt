@@ -1,25 +1,28 @@
-__  __  __
-\ \ \ \ \/
- \ \/\ \
-  \/  \/
+____  ____
+|  _ \|  _ \
+| |_) | |_) |
+|  _ <|  _ <
+|_| \_\_| \_\
 
 The humans.txt file explains the team, technology,
 and graphic assets behind this site humanstxt.org.
 
 _______________________________________________________________________________
 
-DESIGNER | デザイナー
+AI AUTOMATION ENGINEER | エンジニア
 
-Hamish Williams
-Hand crafted design & web development
+Rajpal Rathore
+AI Automation & System Development
 
-Design tools:
-Figma
-Photoshop
-Blender
+Tech Stack:
+Python
+LLMs & Voice AI
+REST APIs
+Workflow Orchestration
 
-twitter.com/hamishmw
-github.com/hamishmw
+github.com/Rathore-Rajpal
+linkedin.com/in/rajpal-rathore-4293151b6
+x.com/RajpalSing66971
 
 _______________________________________________________________________________
 

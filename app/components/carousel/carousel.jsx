@@ -28,7 +28,7 @@ function determineIndex(imageIndex, index, images, direction) {
   return finalIndex;
 }
 
-export const Carousel = ({ width, height, images, placeholder, ...rest }) => {
+export const Carousel = ({ width, height, images, placeholder, autoPlay = true, autoPlayInterval = 3000, ...rest }) => {
   const [dragging, setDragging] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -50,6 +50,7 @@ export const Carousel = ({ width, height, images, placeholder, ...rest }) => {
   const inViewport = useInViewport(canvas, true);
   const placeholderRef = useRef();
   const initSwipeX = useRef();
+  const autoPlayTimer = useRef();
 
   const currentImageAlt = `Slide ${imageIndex + 1} of ${images.length}. ${
     images[imageIndex].alt
@@ -168,11 +169,8 @@ export const Carousel = ({ width, height, images, placeholder, ...rest }) => {
         animating.current = true;
 
         animate(uniforms.dispFactor.value, 1, {
-          type: 'spring',
-          stiffness: 100,
-          damping: 20,
-          restSpeed: 0.001,
-          restDelta: 0.001,
+          duration: 0.8,
+          ease: [0.4, 0.0, 0.2, 1],
           onUpdate: value => {
             uniforms.dispFactor.value = value;
           },
@@ -209,6 +207,23 @@ export const Carousel = ({ width, height, images, placeholder, ...rest }) => {
     },
     [imageIndex, navigate]
   );
+
+  // Auto-play effect
+  useEffect(() => {
+    if (!autoPlay || !loaded || !textures || dragging) return;
+
+    autoPlayTimer.current = setInterval(() => {
+      if (!animating.current) {
+        navigate({ direction: 1 });
+      }
+    }, autoPlayInterval);
+
+    return () => {
+      if (autoPlayTimer.current) {
+        clearInterval(autoPlayTimer.current);
+      }
+    };
+  }, [autoPlay, autoPlayInterval, loaded, textures, dragging, navigate]);
 
   useEffect(() => {
     const handleResize = () => {

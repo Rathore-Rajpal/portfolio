@@ -1,4 +1,4 @@
-import profileImgLarge from '~/assets/profile-large.jpg';
+﻿import profileImgLarge from '~/assets/profile-large.jpg';
 import profileImgPlaceholder from '~/assets/profile-placeholder.jpg';
 import profileImg from '~/assets/profile.jpg';
 import { Button } from '~/components/button';
@@ -6,7 +6,6 @@ import { DecoderText } from '~/components/decoder-text';
 import { Divider } from '~/components/divider';
 import { Heading } from '~/components/heading';
 import { Image } from '~/components/image';
-import { Link } from '~/components/link';
 import { Section } from '~/components/section';
 import { Text } from '~/components/text';
 import { Transition } from '~/components/transition';
@@ -21,16 +20,17 @@ const ProfileText = ({ visible, titleId }) => (
       <DecoderText text="Hi there" start={visible} delay={500} />
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I’m Hamish, currently I live in Sydney working as a senior product designer at{' '}
-      <Link href="https://www.qwilr.com">Qwilr</Link>. My projects include UX design, UI
-      animations, and icon illustration. Being comfortable with code allows me to rapidly
-      prototype and validate experiences. If you’re interested in the tools and software I
-      use check out my <Link href="/uses">uses page</Link>.
+      I'm Rajpal, an AI Automation Engineer who builds systems that actually replace manual
+      work - not just fancy demos. I work at the intersection of AI, automation, and
+      real-world business workflows, turning messy inputs (calls, leads, messages, data)
+      into clean, structured, actionable outputs.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      In my spare time I like to practice Brazilian Jiu Jitsu, play video games, and{' '}
-      <Link href="/projects/volkihar-knight">make mods</Link>. I’m always down for hearing
-      about new projects, so feel free to drop me a line.
+      My comfort zone includes Python, LLMs, REST APIs, workflow orchestration, voice AI,
+      and end-to-end automation. I've built and deployed production-grade AI systems used
+      by real teams - from call analysis platforms and CRMs to autonomous agents that
+      talk, analyze, decide, and act. If it saves time, money, or sanity - I'm probably
+      building it. Feel free to drop me a line.
     </Text>
   </Fragment>
 );
@@ -86,7 +86,7 @@ export const Profile = ({ id, visible, sectionRef }) => {
                   width={960}
                   height={1280}
                   sizes={`(max-width: ${media.mobile}px) 100vw, 480px`}
-                  alt="Me smiling like a goofball at the Qwilr office in Sydney"
+                  alt="Rajpal Rathore - AI Automation Engineer"
                 />
                 <svg className={styles.svg} data-visible={visible} viewBox="0 0 136 766">
                   <use href={`${katakana}#katakana-profile`} />

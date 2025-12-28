@@ -1,3 +1,13 @@
+/* Section label for nav sidebar */
+.navSectionLabel {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary, #aaa);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  padding-left: 0.5rem;
+}
 @layer layout {
   .navbar {
     --headerNavFontSize: calc((16 / 16) * 1rem);
