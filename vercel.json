@@ -1,14 +1,15 @@
 {
-  "buildCommand": "remix vite:build",
-  "devCommand": "remix vite:dev",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": null,
   "outputDirectory": "build/client",
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "build/server/**"
+    }
+  },
   "routes": [
-    {
-      "src": "/build/(.*)",
-      "dest": "/build/$1"
-    },
     {
       "handle": "filesystem"
     },
