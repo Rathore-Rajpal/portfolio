@@ -1,11 +1,4 @@
-import { createRequestHandler } from '@remix-run/node';
-import { installGlobals } from '@remix-run/node';
+import { createRequestHandler } from '@remix-run/vercel';
+import * as build from './build/server/index.js';
 
-installGlobals();
-
-const build = await import('./build/server/index.js');
-
-export default createRequestHandler({
-  build,
-  mode: process.env.NODE_ENV || 'production',
-});
+export default createRequestHandler({ build });
