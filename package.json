@@ -9,7 +9,7 @@
   "scripts": {
   "dev": "remix vite:dev",
   "build": "remix vite:build",
-  "start": "remix-serve ./build/server/index.js",
+  "start": "node server.js",
   "postinstall": "node ./scripts/draco.cjs",
   "dev:storybook": "storybook dev -p 6006",
   "build:storybook": "storybook build"
