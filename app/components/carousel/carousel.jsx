@@ -1,5 +1,5 @@
 import { animate, useReducedMotion } from 'framer-motion';
-import { useInViewport } from '~/hooks';
+import { useInViewport, useHasMounted } from '~/hooks';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   Color,
@@ -29,6 +29,7 @@ function determineIndex(imageIndex, index, images, direction) {
 }
 
 export const Carousel = ({ width, height, images, placeholder, autoPlay = true, autoPlayInterval = 3000, ...rest }) => {
+  const hasMounted = useHasMounted();
   const [dragging, setDragging] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -48,6 +49,23 @@ export const Carousel = ({ width, height, images, placeholder, autoPlay = true, 
   const scheduledAnimationFrame = useRef();
   const reduceMotion = useReducedMotion();
   const inViewport = useInViewport(canvas, true);
+  
+  // Don't render on server
+  if (!hasMounted) {
+    return (
+      <div className={styles.carousel} style={cssProps({ aspectRatio: `${width} / ${height}` })} {...rest}>
+        {placeholder && (
+          <img
+            className={styles.placeholder}
+            src={placeholder.src}
+            alt=""
+            role="presentation"
+            style={{ width, height }}
+          />
+        )}
+      </div>
+    );
+  }
   const placeholderRef = useRef();
   const initSwipeX = useRef();
   const autoPlayTimer = useRef();
