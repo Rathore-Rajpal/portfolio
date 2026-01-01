@@ -29,7 +29,6 @@ export default defineConfig({
         });
       },
     }),
-    // No Cloudflare proxy plugin for Node SSR
     jsconfigPaths(),
   ],
 });
