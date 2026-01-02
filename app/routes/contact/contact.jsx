@@ -15,7 +15,6 @@ import { cssProps, msToNum, numToMs } from '~/utils/style';
 import { baseMeta } from '~/utils/meta';
 import { Form, useActionData, useNavigation } from '@remix-run/react';
 import { json } from '@remix-run/cloudflare';
-import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
 import styles from './contact.module.css';
 
 export const meta = () => {
@@ -31,14 +30,6 @@ const MAX_MESSAGE_LENGTH = 4096;
 const EMAIL_PATTERN = /(.+)@(.+){2,}\.(.+){2,}/;
 
 export async function action({ request, context }) {
-  const ses = new SESClient({
-    region: 'us-east-1',
-    credentials: {
-      accessKeyId: context.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: context.env.AWS_SECRET_ACCESS_KEY,
-    },
-  });
-
   const formData = await request.formData();
   const isBot = String(formData.get('name'));
   const email = String(formData.get('email'));
@@ -69,26 +60,9 @@ export async function action({ request, context }) {
     return json({ errors });
   }
 
-  // Send email via Amazon SES
-  await ses.send(
-    new SendEmailCommand({
-      Destination: {
-        ToAddresses: [context.env.EMAIL],
-      },
-      Message: {
-        Body: {
-          Text: {
-            Data: `From: ${email}\n\n${message}`,
-          },
-        },
-        Subject: {
-          Data: `Portfolio message from ${email}`,
-        },
-      },
-      Source: `Portfolio <${context.env.FROM_EMAIL}>`,
-      ReplyToAddresses: [email],
-    })
-  );
+  // Email functionality disabled for Cloudflare Pages deployment
+  // To enable: Set up Cloudflare Email Workers or use a compatible email service
+  console.log('Contact form submission:', { email, message });
 
   return json({ success: true });
 }
