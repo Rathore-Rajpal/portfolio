@@ -1,6 +1,6 @@
-import { json, createCookieSessionStorage } from '@remix-run/node';
+import { json, createCookieSessionStorage } from '@remix-run/cloudflare';
 
-export async function action({ request }) {
+export async function action({ request, context }) {
   const formData = await request.formData();
   const theme = formData.get('theme');
 
@@ -11,7 +11,7 @@ export async function action({ request }) {
       maxAge: 604_800,
       path: '/',
       sameSite: 'lax',
-      secrets: [process.env.SESSION_SECRET || ' '],
+      secrets: [context.env?.SESSION_SECRET || ' '],
       secure: true,
     },
   });

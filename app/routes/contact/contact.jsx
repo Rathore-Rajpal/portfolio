@@ -14,7 +14,7 @@ import { useRef } from 'react';
 import { cssProps, msToNum, numToMs } from '~/utils/style';
 import { baseMeta } from '~/utils/meta';
 import { Form, useActionData, useNavigation } from '@remix-run/react';
-import { json } from '@remix-run/node';
+import { json } from '@remix-run/cloudflare';
 import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
 import styles from './contact.module.css';
 
@@ -30,12 +30,12 @@ const MAX_EMAIL_LENGTH = 512;
 const MAX_MESSAGE_LENGTH = 4096;
 const EMAIL_PATTERN = /(.+)@(.+){2,}\.(.+){2,}/;
 
-export async function action({ request }) {
+export async function action({ request, context }) {
   const ses = new SESClient({
     region: 'us-east-1',
     credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      accessKeyId: context.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: context.env.AWS_SECRET_ACCESS_KEY,
     },
   });
 
@@ -73,7 +73,7 @@ export async function action({ request }) {
   await ses.send(
     new SendEmailCommand({
       Destination: {
-        ToAddresses: [process.env.EMAIL],
+        ToAddresses: [context.env.EMAIL],
       },
       Message: {
         Body: {
@@ -85,7 +85,7 @@ export async function action({ request }) {
           Data: `Portfolio message from ${email}`,
         },
       },
-      Source: `Portfolio <${process.env.FROM_EMAIL}>`,
+      Source: `Portfolio <${context.env.FROM_EMAIL}>`,
       ReplyToAddresses: [email],
     })
   );
